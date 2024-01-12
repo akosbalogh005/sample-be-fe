@@ -36,7 +36,10 @@ func main() {
 
 func Health(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Call from %v. Path: %v", r.RemoteAddr, r.URL.Path)
-	w.Write(([]byte)("OK"))
+	_, err := w.Write(([]byte)("OK"))
+	if err != nil {
+		log.Printf("Error while responding: %v", err)
+	}
 }
 
 func Message(w http.ResponseWriter, r *http.Request) {
@@ -44,5 +47,8 @@ func Message(w http.ResponseWriter, r *http.Request) {
 	resp := fmt.Sprintf("Hello message from %v. Time: %v", hostname, time.Now())
 	w.Header().Set("Content-Type", "text; charset=utf-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Write(([]byte)(resp))
+	_, err := w.Write(([]byte)(resp))
+	if err != nil {
+		log.Printf("Error while responding: %v", err)
+	}
 }

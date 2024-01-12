@@ -72,7 +72,10 @@ func main() {
 
 func health(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Call (healthcheck) from %v. Path: %v", r.RemoteAddr, r.URL.Path)
-	w.Write(([]byte)("OK"))
+	_, err := w.Write(([]byte)("OK"))
+	if err != nil {
+		log.Printf("Error while responding: %v", err)
+	}
 }
 
 func healthWithBeCheck(w http.ResponseWriter, r *http.Request) {
@@ -81,10 +84,16 @@ func healthWithBeCheck(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Printf("Error: %v (BE Return with HTTP 500) ", err)
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write(([]byte)(err.Error()))
+		_, err := w.Write(([]byte)(err.Error()))
+		if err != nil {
+			log.Printf("Error while responding: %v", err)
+		}
+		return
 	}
-
-	w.Write(([]byte)("OK"))
+	_, err = w.Write(([]byte)("OK"))
+	if err != nil {
+		log.Printf("Error while responding: %v", err)
+	}
 }
 
 func callHTTP(path string) (string, error) {
@@ -115,8 +124,15 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	b := backend_external + "/message"
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	ret, _ := callHTTP("/message")
+	ret, err := callHTTP("/message")
+	if err != nil {
+		log.Printf("Error while calling /message : %v", err)
+	}
 	resp := fmt.Sprintf(indexhtml, b, b, ret)
 	rnd := renderer.New()
-	rnd.HTMLString(w, http.StatusOK, resp)
+	err = rnd.HTMLString(w, http.StatusOK, resp)
+	if err != nil {
+		log.Printf("Error while render HTML : %v", err)
+	}
+
 }
