@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  backend:
+    image: akosbalogh005/backend-test:1.0
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.backend  
+    ports:
+      - "19090:9090"

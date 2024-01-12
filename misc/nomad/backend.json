@@ -1,0 +1,262 @@
+{
+    "Stop": false,
+    "Region": "global",
+    "Namespace": "default",
+    "ID": "backend-test",
+    "ParentID": "",
+    "Name": "backend-test",
+    "Type": "service",
+    "Priority": 50,
+    "AllAtOnce": false,
+    "Datacenters": [
+      "acme"
+    ],
+    "Constraints": [
+        {
+          "LTarget": "${meta.node_type}",
+          "RTarget": "aio",
+          "Operand": "regexp"
+        }
+      ],    
+    "Affinities": null,
+    "Spreads": null,
+    "TaskGroups": [
+      {
+        "Name": "backend-test-group",
+        "Count": 1,
+        "Update": {
+          "Stagger": 30000000000,
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 10000000000,
+          "HealthyDeadline": 300000000000,
+          "ProgressDeadline": 600000000000,
+          "AutoRevert": false,
+          "AutoPromote": false,
+          "Canary": 0
+        },
+        "Migrate": {
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 10000000000,
+          "HealthyDeadline": 300000000000
+        },
+        "Constraints": null,
+        "Scaling": null,
+        "RestartPolicy": {
+          "Attempts": 10,
+          "Interval": 600000000000,
+          "Delay": 60000000000,
+          "Mode": "delay"
+        },
+        "Tasks": [
+          {
+            "Name": "backend-test-task",
+            "Driver": "docker",
+            "User": "",          
+            "Config": {
+              "force_pull": "false",
+              "load": "backend-test.tar",
+              "image": "backend-test:latest",
+              "image_pull_timeout": "20m",
+              "command" : "/backend",
+              "args" : null,
+              "network_mode" : "staticip",
+              "port_map" : null,
+              "ipv4_address" : "172.17.0.10",
+              "dns_servers" : [ "172.17.0.1" ]
+            },
+            "Env": null,
+            "Services": [
+                {
+                  "Name": "backend-test-task-healthcheck",
+                  "TaskName": "backend-test-task",
+                  "PortLabel": "",
+                  "AddressMode": "auto",
+                  "Address": "",
+                  "EnableTagOverride": false,
+                  "Tags": null,
+                  "CanaryTags": null,
+                  "Checks": [
+                    {
+                      "Name": "backend-test-task-health-check",
+                      "Type": "http",
+                      "Command": "",
+                      "Args": null,
+                      "Path": "health",
+                      "Protocol": "",
+                      "PortLabel": "9090",
+                      "Expose": false,
+                      "AddressMode": "driver",
+                      "Interval": 60000000000,
+                      "Timeout": 5000000000,
+                      "InitialStatus": "",
+                      "TLSServerName": "",
+                      "TLSSkipVerify": false,
+                      "Method": "",
+                      "Header": null,
+                      "CheckRestart": null,
+                      "GRPCService": "",
+                      "GRPCUseTLS": false,
+                      "TaskName": "backend-test-task",
+                      "SuccessBeforePassing": 0,
+                      "FailuresBeforeCritical": 0,
+                      "Body": "",
+                      "OnUpdate": "require_healthy"
+                    }
+                  ],
+                  "Connect": null,
+                  "Meta": null,
+                  "CanaryMeta": null,
+                  "TaggedAddresses": null,
+                  "Namespace": "default",
+                  "OnUpdate": "require_healthy",
+                  "Provider": "consul"
+                },
+                {
+                  "Name": "backend-test-task-service",
+                  "TaskName": "backend-test-task",
+                  "PortLabel": "9090",
+                  "AddressMode": "driver",
+                  "Address": "",
+                  "EnableTagOverride": false,
+                  "Tags": null,
+                  "CanaryTags": null,
+                  "Checks": null,
+                  "Connect": null,
+                  "Meta": null,
+                  "CanaryMeta": null,
+                  "TaggedAddresses": null,
+                  "Namespace": "default",
+                  "OnUpdate": "require_healthy",
+                  "Provider": "consul"
+                },
+                {
+                  "Name": "backend-test-task",
+                  "TaskName": "backend-test-task",
+                  "PortLabel": "",
+                  "AddressMode": "driver",
+                  "Address": "",
+                  "EnableTagOverride": false,
+                  "Tags": null,
+                  "CanaryTags": null,
+                  "Checks": null,
+                  "Connect": null,
+                  "Meta": null,
+                  "CanaryMeta": null,
+                  "TaggedAddresses": null,
+                  "Namespace": "default",
+                  "OnUpdate": "require_healthy",
+                  "Provider": "consul"
+                }
+              ],            
+            "Vault": null,
+            "Templates": null,
+            "Constraints": null,
+            "Affinities": null,
+            "Resources": {
+              "CPU": 100,
+              "MemoryMB": 256,
+              "DiskMB": 0,
+              "IOPS": 0,
+              "Networks": [
+                {
+                  "Mode": "",
+                  "Device": "",
+                  "CIDR": "",
+                  "IP": "",
+                  "MBits": 0,
+                  "DNS": null,
+                  "ReservedPorts": [],
+                  "DynamicPorts": null
+                }
+              ],
+              "Devices": null
+            },
+            "RestartPolicy": {
+              "Attempts": 10,
+              "Interval": 600000000000,
+              "Delay": 60000000000,
+              "Mode": "delay"
+            },
+            "DispatchPayload": null,
+            "Lifecycle": null,
+            "Meta": null,
+            "KillTimeout": 5000000000,
+            "LogConfig": {
+              "MaxFiles": 10,
+              "MaxFileSizeMB": 10
+            },
+            "Leader": false,
+            "Artifacts": [
+              {
+                "GetterSource": "https://repository.rcs.internal/artifacts/images/tmp/backend-test.tar",
+                "GetterOptions": {
+                  "archive": "false"
+                },
+                "GetterHeaders": null,
+                "GetterMode": "any",
+                "RelativeDest": "local/"
+              }
+            ],          
+            "ShutdownDelay": 0,
+            "VolumeMounts": null,
+            "ScalingPolicies": null,
+            "KillSignal": "",
+            "Kind": "",
+            "CSIPluginConfig": null
+          }
+        ],
+        "EphemeralDisk": {
+          "Sticky": false,
+          "SizeMB": 300,
+          "Migrate": false
+        },
+        "Meta": null,
+        "ReschedulePolicy": {
+          "Attempts": 0,
+          "Interval": 0,
+          "Delay": 30000000000,
+          "DelayFunction": "exponential",
+          "MaxDelay": 3600000000000,
+          "Unlimited": true
+        },
+        "Affinities": null,
+        "Spreads": null,
+        "Networks": null,
+        "Services": null,
+        "Volumes": null,
+        "ShutdownDelay": null,
+        "StopAfterClientDisconnect": null
+      }
+    ],
+    "Update": {
+      "Stagger": 30000000000,
+      "MaxParallel": 1,
+      "HealthCheck": "",
+      "MinHealthyTime": 0,
+      "HealthyDeadline": 0,
+      "ProgressDeadline": 0,
+      "AutoRevert": false,
+      "AutoPromote": false,
+      "Canary": 0
+    },
+    "Multiregion": null,
+    "Periodic": null,
+    "ParameterizedJob": null,
+    "Dispatched": false,
+    "Payload": null,
+    "Meta": null,
+    "ConsulToken": "",
+    "VaultToken": "",
+    "VaultNamespace": "",
+    "NomadTokenID": "",
+    "Status": "running",
+    "StatusDescription": "",
+    "Stable": true,
+    "Version": 1,
+    "SubmitTime": 1689937737307334000,
+    "CreateIndex": 1387279,
+    "ModifyIndex": 1403396,
+    "JobModifyIndex": 1403352
+  }

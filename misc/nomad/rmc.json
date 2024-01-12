@@ -1,0 +1,1889 @@
+{
+    "Stop": false,
+    "Region": "global",
+    "Namespace": "default",
+    "ID": "RadarManagementCenterStack-285",
+    "ParentID": "",
+    "Name": "RadarManagementCenterStack-285",
+    "Type": "service",
+    "Priority": 50,
+    "AllAtOnce": false,
+    "Datacenters": [
+      "acme"
+    ],
+    "NodePool": "default",
+    "Constraints": [
+      {
+        "LTarget": "${meta.node_type}",
+        "RTarget": "core|aio",
+        "Operand": "regexp"
+      }
+    ],
+    "Affinities": null,
+    "Spreads": null,
+    "TaskGroups": [
+      {
+        "Name": "rmca-group",
+        "Count": 1,
+        "Update": {
+          "Stagger": 30000000000,
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 3000000000,
+          "HealthyDeadline": 1800000000000,
+          "ProgressDeadline": 1860000000000,
+          "AutoRevert": false,
+          "AutoPromote": false,
+          "Canary": 0
+        },
+        "Migrate": {
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 10000000000,
+          "HealthyDeadline": 300000000000
+        },
+        "Constraints": [
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${attr.consul.version}",
+            "RTarget": ">= 1.7.0",
+            "Operand": "semver"
+          }
+        ],
+        "Scaling": null,
+        "RestartPolicy": {
+          "Attempts": 2,
+          "Interval": 1800000000000,
+          "Delay": 15000000000,
+          "Mode": "fail"
+        },
+        "Tasks": [
+          {
+            "Name": "sj85",
+            "Driver": "lxc",
+            "User": "",
+            "Config": {
+              "template_args": [
+                "https://repository.rcs.internal/artifacts/images/lxc/buster/",
+                "radar-management-center-api",
+                "v12.5.0"
+              ],
+              "verbosity": "verbose",
+              "volumes": [
+                "local/resolv.conf:etc/resolv.conf:file:root:root:0644",
+                "local/0eb9907dff9458ad56c7ee4133b9f43f22be60ae5acca747d7ab4c35b569c10d:etc/radar/rmca_database.yml:file:radar:radar:0644",
+                "local/d28a48562f535fd2b41f1ec6e49f09451c64f1a9c9270d6af598f486669f62c2:etc/radar/rmca_settings.yml:file:radar:radar:0644",
+                "local/e86d2f38168917b82d542e0620d097b938a77497eecff4de5ba758fedc2d1269:etc/cron.d/rmca-fix:file:root:root:0755",
+                "local/37dea856ab1af068dc348c728d190ffe49cdcb24ce479e474af6d6ad04bc65b7:var/www/radar/radar-management-center-api/db/migrate/20130806111545_create-admin-user.rb:file:root:root:0644",
+                "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba:etc/vector/vector.env:file:root:root:0644"
+              ],
+              "network_ipv4": "10.11.0.9",
+              "uid_map": 262144,
+              "release": "prod",
+              "external_volumes": [
+                "/srv/data/upload/rmca/scans:srv/radar/scan-archive/:0777:1000",
+                "nessus-source/:srv/nessus-source/:0777:1000"
+              ],
+              "log_level": "error",
+              "template": "/usr/share/lxc/templates/lxc-radar",
+              "network_ipv4_gateway": "10.11.0.1",
+              "ports": []
+            },
+            "Env": null,
+            "Services": [
+              {
+                "Name": "healthcheck-sj85",
+                "TaskName": "sj85",
+                "PortLabel": "",
+                "AddressMode": "auto",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": [
+                  {
+                    "Name": "rmca_check",
+                    "Type": "http",
+                    "Command": "",
+                    "Args": null,
+                    "Path": "health_checks/all",
+                    "Protocol": "",
+                    "PortLabel": "8086",
+                    "Expose": false,
+                    "AddressMode": "driver",
+                    "Interval": 60000000000,
+                    "Timeout": 5000000000,
+                    "InitialStatus": "",
+                    "TLSServerName": "",
+                    "TLSSkipVerify": false,
+                    "Method": "",
+                    "Header": null,
+                    "CheckRestart": null,
+                    "GRPCService": "",
+                    "GRPCUseTLS": false,
+                    "TaskName": "sj85",
+                    "SuccessBeforePassing": 0,
+                    "FailuresBeforeCritical": 0,
+                    "Body": "",
+                    "OnUpdate": "require_healthy"
+                  }
+                ],
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmca-service",
+                "TaskName": "sj85",
+                "PortLabel": "8086",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmca-metrics",
+                "TaskName": "sj85",
+                "PortLabel": "10000",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": [
+                  "prometheus",
+                  "exporter",
+                  "metrics"
+                ],
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmca",
+                "TaskName": "sj85",
+                "PortLabel": "",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              }
+            ],
+            "Vault": null,
+            "Templates": [
+              {
+                "SourcePath": "",
+                "DestPath": "local/resolv.conf",
+                "EmbeddedTmpl": "nameserver 10.11.0.4",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/0eb9907dff9458ad56c7ee4133b9f43f22be60ae5acca747d7ab4c35b569c10d",
+                "EmbeddedTmpl": "defaults: &defaults\n  adapter: postgresql\n  encoding: utf8\n  pool: 5\n\ndevelopment:\n  database: rmca_development\n  <<: *defaults\n  repositories:\n\ntest: &test\n  database: rmca_test\n  <<: *defaults\n  repositories:\n\nproduction: &production\n  username:  rmca \n  password:  93a9ngt28q \n  database: rmca\n  host:  postgres.service.acme.consul \n  <<: *defaults\n  repositories:\n\nintegration:\n  <<: *test\n\nstaging:\n  username: postgres\n  password:\n  host: db\n  <<: *production\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/d28a48562f535fd2b41f1ec6e49f09451c64f1a9c9270d6af598f486669f62c2",
+                "EmbeddedTmpl": "listeners: []\n\nlisten: '0.0.0.0:8086'\n\nredis:\n  url: 'redis://redis.service.acme.consul:6379/1'\n\nprocessor:\n  path: '/opt/radar/radar-scanprocessor'\n  executable:\n    - bundle\n    - exec\n    - \"./bin/radar2ossim-export\"\n\nscanner:\n  path: '/opt/radar/radar-scanner'\n  executable: \"bundle exec ./bin/radar-scanner -q\"\n\nreporting:\n  url: \"http://reporting.service.acme.consul:8087\"\n\n\n#\n# CHANGEME: Adapt information below for customer\n#\n\nmail:\n  default_from: \"RadarServices <ris@radarservices.com>\"\n\ninformation_center:\n  base_url: \"https://radar.local\"\n\ntimeout: 300\n\nossim_database: 'mysql://root:CHANGEME@localhost/alienvault'\n\nknowledge_base:\n  timeout: 60\n  url: 'http://knowledgebase.service.consul'\n\nlogmule:\n  check_path: \"logmule-check\"\n  validate: false\n\ncantor:\n  active: false\n  url: http://localhost:8088\n  lookup: /lookup\n\nnessus:\n  asset_authentication: [policy, secret_server]\n  verify_certs: false\n  download_timeout: 3600\n  connection_timeout: 300\n  lockfile_directory: '/var/run/radar-management-center-api/'\n\nrisk_intervals:\n  high: [8, 10]\n  medium: [5, 8]\n  low: [1, 5]\n  none: [0, 1]\n\neasy_redmine:\n  enable: false\n  url: ''\n  verify_ssl_cert: true\n  api_key: ''\n  project_id: ''\n  tracker_id: '16'\n  due_days: 1\n  category_id: '4'\n  category_name: 'Monitoring'\n  automatic_alert_minimum_risk_score: 0\n\nscans:\n  file_archive: /srv/radar/scan-archive\n  source_dir: /srv/nessus-source\n\nunicorn:\n  workers: 6\n  pid_path: 'tmp/pids/radar-management-center-api.pid'\n# check which SSL version the box supports. The accepted string for the library are:\n# SSLv23 SSLv2 SSLv3 TLSv1 TLSv1_1 TLSv1_2\nldap:\n  ssl_version: 'TLSv1_1' #default value \n\nmaterialized_views:\n  enabled: false       # default value\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/e86d2f38168917b82d542e0620d097b938a77497eecff4de5ba758fedc2d1269",
+                "EmbeddedTmpl": "# Lines below here are managed by Salt, do not edit\nPATH=/usr/local/bin:/usr/bin:/bin\n# UGLY WORKAROUND FOR CREATING A RUN DIR FOR RMCA\n1 * * * * radar mkdir /var/run/radar && chown -R radar:radar /var/run/radar > /dev/nul 2>&1\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/37dea856ab1af068dc348c728d190ffe49cdcb24ce479e474af6d6ad04bc65b7",
+                "EmbeddedTmpl": "require 'securerandom'\n\nSequel.migration do\n  up do\n    user_table = Sequel::Model.db[:users]\n    user_timeline_table = Sequel::Model.db[:user_timelines]\n    if user_table.filter(login: 'admin').count == 0\n      now = DateTime.now\n      data = {\n        login: 'admin',\n        name: 'Risk Intelligence Team',\n        password: BCrypt::Password.create('admin'),\n        admin: true,\n        created_at: now,\n        updated_at: now\n      }\n      user_id = user_table.insert(data)\n      user_timeline_table.insert(\n        data.merge(timeline_id: user_id, timeline_timestamp: now)\n      )\n    end\n  end\n\n  down do\n    # Don't delete the admin user here as we don't want to loose data.\n    # The \"up\" method can safely run twice.\n  end\nend\n\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba",
+                "EmbeddedTmpl": "VECTOR_CUSTOMER=\"acme\"\nVECTOR_HOST=\"sj85\"\nVECTOR_CLICKHOUSE_HOST=\"http://sinkhole.service.consul:8123\"\nVECTOR_CLICKHOUSE_USER=\"vector\"\nVECTOR_CLICKHOUSE_PASSWORD=\"Xns0CbDFwswdtKQONMIqORZSE6ZvrE\"\nLOG=error",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              }
+            ],
+            "Constraints": null,
+            "Affinities": null,
+            "Resources": {
+              "CPU": 2000,
+              "Cores": 0,
+              "MemoryMB": 8192,
+              "MemoryMaxMB": 0,
+              "DiskMB": 0,
+              "IOPS": 0,
+              "Networks": null,
+              "Devices": null
+            },
+            "RestartPolicy": {
+              "Attempts": 2,
+              "Interval": 1800000000000,
+              "Delay": 15000000000,
+              "Mode": "fail"
+            },
+            "DispatchPayload": null,
+            "Lifecycle": null,
+            "Meta": {
+              "task_id": "6"
+            },
+            "KillTimeout": 5000000000,
+            "LogConfig": {
+              "MaxFiles": 10,
+              "MaxFileSizeMB": 10,
+              "Disabled": false
+            },
+            "Artifacts": null,
+            "Leader": false,
+            "ShutdownDelay": 0,
+            "VolumeMounts": null,
+            "ScalingPolicies": null,
+            "KillSignal": "",
+            "Kind": "",
+            "CSIPluginConfig": null,
+            "Identity": null
+          }
+        ],
+        "EphemeralDisk": {
+          "Sticky": false,
+          "SizeMB": 300,
+          "Migrate": false
+        },
+        "Meta": null,
+        "ReschedulePolicy": {
+          "Attempts": 0,
+          "Interval": 0,
+          "Delay": 30000000000,
+          "DelayFunction": "exponential",
+          "MaxDelay": 3600000000000,
+          "Unlimited": true
+        },
+        "Affinities": null,
+        "Spreads": null,
+        "Networks": null,
+        "Consul": {
+          "Namespace": ""
+        },
+        "Services": null,
+        "Volumes": null,
+        "ShutdownDelay": null,
+        "StopAfterClientDisconnect": null,
+        "MaxClientDisconnect": null
+      },
+      {
+        "Name": "rmcf-group",
+        "Count": 1,
+        "Update": {
+          "Stagger": 30000000000,
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 5000000000,
+          "HealthyDeadline": 120000000000,
+          "ProgressDeadline": 7800000000000,
+          "AutoRevert": false,
+          "AutoPromote": false,
+          "Canary": 0
+        },
+        "Migrate": {
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 10000000000,
+          "HealthyDeadline": 300000000000
+        },
+        "Constraints": [
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${attr.consul.version}",
+            "RTarget": ">= 1.7.0",
+            "Operand": "semver"
+          }
+        ],
+        "Scaling": null,
+        "RestartPolicy": {
+          "Attempts": 2,
+          "Interval": 1800000000000,
+          "Delay": 15000000000,
+          "Mode": "fail"
+        },
+        "Tasks": [
+          {
+            "Name": "5x7p",
+            "Driver": "lxc",
+            "User": "",
+            "Config": {
+              "ports": [],
+              "release": "prod",
+              "network_ipv4": "10.11.0.74",
+              "log_level": "error",
+              "uid_map": 327680,
+              "network_ipv4_gateway": "10.11.0.1",
+              "verbosity": "verbose",
+              "template": "/usr/share/lxc/templates/lxc-radar",
+              "template_args": [
+                "https://repository.rcs.internal/artifacts/images/lxc/buster/",
+                "radar-management-center-frontend",
+                "v10.5.0"
+              ],
+              "external_volumes": [
+                "rmcf-upload-radar-documents:var/opt/radar/documents:0777:0"
+              ],
+              "volumes": [
+                "local/resolv.conf:etc/resolv.conf:file:root:root:0644",
+                "local/946397608258610c53e864d64cc1723bbc59221c304f5c74dbcdde8172eddf8b:etc/radar/rmcf_settings.yml:file:radar:radar:0644",
+                "local/58dd52c69a61eeee4fd0611f8ad5ad0b7cf0775c532e1d0394ed7cc6ded99208:etc/logrotate.d/rmcf:file:radar:radar:0644",
+                "/srv/data/lxc_storage/nessus-source/:srv/nessus-source/:dir:radar:radar:0777",
+                "/srv/data/lxc_storage/radar-reporting:var/opt/radar-reporting:dir:radar:radar:0777",
+                "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba:etc/vector/vector.env:file:root:root:0644"
+              ]
+            },
+            "Env": null,
+            "Services": [
+              {
+                "Name": "healthcheck-5x7p",
+                "TaskName": "5x7p",
+                "PortLabel": "",
+                "AddressMode": "auto",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": [
+                  {
+                    "Name": "rmcf-health-check",
+                    "Type": "http",
+                    "Command": "",
+                    "Args": null,
+                    "Path": "health_checks",
+                    "Protocol": "",
+                    "PortLabel": "8085",
+                    "Expose": false,
+                    "AddressMode": "driver",
+                    "Interval": 60000000000,
+                    "Timeout": 5000000000,
+                    "InitialStatus": "",
+                    "TLSServerName": "",
+                    "TLSSkipVerify": false,
+                    "Method": "",
+                    "Header": null,
+                    "CheckRestart": null,
+                    "GRPCService": "",
+                    "GRPCUseTLS": false,
+                    "TaskName": "5x7p",
+                    "SuccessBeforePassing": 0,
+                    "FailuresBeforeCritical": 0,
+                    "Body": "",
+                    "OnUpdate": "require_healthy"
+                  }
+                ],
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmcf-service",
+                "TaskName": "5x7p",
+                "PortLabel": "8085",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmcf-metrics",
+                "TaskName": "5x7p",
+                "PortLabel": "10000",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": [
+                  "prometheus",
+                  "exporter",
+                  "metrics"
+                ],
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmcf",
+                "TaskName": "5x7p",
+                "PortLabel": "",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmc-service",
+                "TaskName": "5x7p",
+                "PortLabel": "8085",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmc-metrics",
+                "TaskName": "5x7p",
+                "PortLabel": "10000",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": [
+                  "prometheus",
+                  "exporter",
+                  "metrics"
+                ],
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rmc",
+                "TaskName": "5x7p",
+                "PortLabel": "",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              }
+            ],
+            "Vault": null,
+            "Templates": [
+              {
+                "SourcePath": "",
+                "DestPath": "local/resolv.conf",
+                "EmbeddedTmpl": "nameserver 10.11.0.4",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/946397608258610c53e864d64cc1723bbc59221c304f5c74dbcdde8172eddf8b",
+                "EmbeddedTmpl": "api:\n  url: http://rmca.service.acme.consul:8086\n\nlog:\n  login:\n    directory: /var/log/radar/rmcf/radar-management-center-frontend.log\n\nfeatures:\n  alerts: false\n\ntimeout: 300\n\nlisteners:\n  - '0.0.0.0:8085'\n\nrisk_intervals:\n  high: [8, 10]\n  medium: [5, 8]\n  low: [1, 5]\n  none: [0, 1]\n\nunicorn:\n  workers: 2\n\nsessions:\n  redis_url: 'redis://redis.service.acme.consul:6379/2'\n\n# workaround - healthcheck uses this config\nredis_url: 'redis://redis.service.acme.consul:6379/2'\n\nscan_import:\n  source_dir: '/srv/nessus-source'\n\nsecret_key_base: N38VjLRdijbHEMpmrrfDLVfSdFJ3beVb9erbZnEDYcCn4rcrnZwVeHZaWkvZN3VU\n\nadapter:\n  paths:\n    - \"lib/adapters/**\"\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/58dd52c69a61eeee4fd0611f8ad5ad0b7cf0775c532e1d0394ed7cc6ded99208",
+                "EmbeddedTmpl": "/var/log/radar/rmcf/*.log\n/var/log/unicorn/radar-management-center-frontend*.log\n{\n        weekly\n        missingok\n        rotate 27\n        compress\n        delaycompress\n        notifempty\n        create 644 radar adm\n        postrotate\n        /etc/init.d/unicorn-rmcf rotate > /dev/null\n        endscript\n}\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba",
+                "EmbeddedTmpl": "VECTOR_CUSTOMER=\"acme\"\nVECTOR_HOST=\"5x7p\"\nVECTOR_CLICKHOUSE_HOST=\"http://sinkhole.service.consul:8123\"\nVECTOR_CLICKHOUSE_USER=\"vector\"\nVECTOR_CLICKHOUSE_PASSWORD=\"Xns0CbDFwswdtKQONMIqORZSE6ZvrE\"\nLOG=error",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              }
+            ],
+            "Constraints": null,
+            "Affinities": null,
+            "Resources": {
+              "CPU": 1000,
+              "Cores": 0,
+              "MemoryMB": 2048,
+              "MemoryMaxMB": 0,
+              "DiskMB": 0,
+              "IOPS": 0,
+              "Networks": null,
+              "Devices": null
+            },
+            "RestartPolicy": {
+              "Attempts": 2,
+              "Interval": 1800000000000,
+              "Delay": 15000000000,
+              "Mode": "fail"
+            },
+            "DispatchPayload": null,
+            "Lifecycle": null,
+            "Meta": {
+              "task_id": "27"
+            },
+            "KillTimeout": 5000000000,
+            "LogConfig": {
+              "MaxFiles": 10,
+              "MaxFileSizeMB": 10,
+              "Disabled": false
+            },
+            "Artifacts": null,
+            "Leader": false,
+            "ShutdownDelay": 0,
+            "VolumeMounts": null,
+            "ScalingPolicies": null,
+            "KillSignal": "",
+            "Kind": "",
+            "CSIPluginConfig": null,
+            "Identity": null
+          }
+        ],
+        "EphemeralDisk": {
+          "Sticky": false,
+          "SizeMB": 300,
+          "Migrate": false
+        },
+        "Meta": null,
+        "ReschedulePolicy": {
+          "Attempts": 0,
+          "Interval": 0,
+          "Delay": 30000000000,
+          "DelayFunction": "exponential",
+          "MaxDelay": 3600000000000,
+          "Unlimited": true
+        },
+        "Affinities": null,
+        "Spreads": null,
+        "Networks": null,
+        "Consul": {
+          "Namespace": ""
+        },
+        "Services": null,
+        "Volumes": null,
+        "ShutdownDelay": null,
+        "StopAfterClientDisconnect": null,
+        "MaxClientDisconnect": null
+      },
+      {
+        "Name": "rsc-group",
+        "Count": 1,
+        "Update": {
+          "Stagger": 30000000000,
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 5000000000,
+          "HealthyDeadline": 120000000000,
+          "ProgressDeadline": 7800000000000,
+          "AutoRevert": false,
+          "AutoPromote": false,
+          "Canary": 0
+        },
+        "Migrate": {
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 10000000000,
+          "HealthyDeadline": 300000000000
+        },
+        "Constraints": [
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${attr.consul.version}",
+            "RTarget": ">= 1.7.0",
+            "Operand": "semver"
+          }
+        ],
+        "Scaling": null,
+        "RestartPolicy": {
+          "Attempts": 2,
+          "Interval": 1800000000000,
+          "Delay": 15000000000,
+          "Mode": "fail"
+        },
+        "Tasks": [
+          {
+            "Name": "73zw",
+            "Driver": "lxc",
+            "User": "",
+            "Config": {
+              "ports": [],
+              "volumes": [
+                "local/resolv.conf:etc/resolv.conf:file:root:root:0644",
+                "local/be78f7c246b3bd3b1c7b18921f63892ecf0febaad498f91120d9ce284c6a60eb:etc/radar/ric_settings.yml:file:root:root:0644",
+                "local/92b01a9fbd230f91e414f47576a8df5acaafb794666e87fb7c7b5f8e249fb3a9:etc/radar/ric_unicorn.rb:file:root:root:0644",
+                "/srv/data/lxc_storage/radar-reporting:var/opt/radar-reporting:dir:radar:radar:0777",
+                "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba:etc/vector/vector.env:file:root:root:0644"
+              ],
+              "log_level": "error",
+              "external_volumes": null,
+              "uid_map": 393216,
+              "network_ipv4": "10.11.0.79",
+              "template_args": [
+                "https://repository.rcs.internal/artifacts/images/lxc/buster/",
+                "radar-information-center",
+                "v10.5.0"
+              ],
+              "verbosity": "verbose",
+              "template": "/usr/share/lxc/templates/lxc-radar",
+              "network_ipv4_gateway": "10.11.0.1",
+              "release": "prod"
+            },
+            "Env": null,
+            "Services": [
+              {
+                "Name": "healthcheck-73zw",
+                "TaskName": "73zw",
+                "PortLabel": "",
+                "AddressMode": "auto",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": [
+                  {
+                    "Name": "ric_healthcheck",
+                    "Type": "tcp",
+                    "Command": "",
+                    "Args": null,
+                    "Path": "",
+                    "Protocol": "",
+                    "PortLabel": "8084",
+                    "Expose": false,
+                    "AddressMode": "driver",
+                    "Interval": 5000000000,
+                    "Timeout": 5000000000,
+                    "InitialStatus": "",
+                    "TLSServerName": "",
+                    "TLSSkipVerify": false,
+                    "Method": "",
+                    "Header": null,
+                    "CheckRestart": null,
+                    "GRPCService": "",
+                    "GRPCUseTLS": false,
+                    "TaskName": "73zw",
+                    "SuccessBeforePassing": 0,
+                    "FailuresBeforeCritical": 0,
+                    "Body": "",
+                    "OnUpdate": "require_healthy"
+                  }
+                ],
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "ric-service",
+                "TaskName": "73zw",
+                "PortLabel": "8084",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "ric-metrics",
+                "TaskName": "73zw",
+                "PortLabel": "10000",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": [
+                  "prometheus",
+                  "exporter",
+                  "metrics"
+                ],
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "ric",
+                "TaskName": "73zw",
+                "PortLabel": "",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rsc-service",
+                "TaskName": "73zw",
+                "PortLabel": "8084",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rsc-metrics",
+                "TaskName": "73zw",
+                "PortLabel": "10000",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": [
+                  "prometheus",
+                  "exporter",
+                  "metrics"
+                ],
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "rsc",
+                "TaskName": "73zw",
+                "PortLabel": "",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              }
+            ],
+            "Vault": null,
+            "Templates": [
+              {
+                "SourcePath": "",
+                "DestPath": "local/resolv.conf",
+                "EmbeddedTmpl": "nameserver 10.11.0.4",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/be78f7c246b3bd3b1c7b18921f63892ecf0febaad498f91120d9ce284c6a60eb",
+                "EmbeddedTmpl": "rrd:\n  ntop_path: /var/lib/ntop_db_64/rrd/interfaces/eth1\nlog:\n  login:\n    directory: /var/log/radar/ric/radar-information-center.log\n\napi:\n  url: http://rmca.service.acme.consul:8086\n\nlisteners:\n  - '0.0.0.0:8084'\n\n#\n# CHANGEME: Adapt information below for customer\n#\n\nfeatures:\n  serviceview: true\n  radarcloud: true\n  reporting: true\n  software: false\n  business_processes: true\n  alerts: false\n\nsessions:\n  timeout_in_mins: 60\ntimeout: 300\n\nuser:\n  password_min_length: 10\n#  mail_domain_whitelist:\n#    - 'customer.lan'\n#    - '*.customer.lan'\n\nrisk_intervals:\n  high: [8, 10]\n  medium: [5, 8]\n  low: [1, 5]\n  none: [0, 1]\n\nunicorn:\n  workers: 2\n\nsessions:\n  redis_url: 'redis://redis.service.acme.consul:6379/3'\n\nsecret_key_base: N38VjLRdijbHEMpmrrfDLVfSdFJ3beVb9erbZnEDYcCn4rcrnZwVeHZaWkvZN3VU\n\nhost_authorization:\n  enabled: false\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/92b01a9fbd230f91e414f47576a8df5acaafb794666e87fb7c7b5f8e249fb3a9",
+                "EmbeddedTmpl": "require 'yaml'\nrequire 'logger'\nrequire 'semantic_logger'\n\napp_name = \"radar-information-center\"\npid \"tmp/pids/#{app_name}.pid\"\n\nstderr_path \"log/unicorn_#{app_name}.error.log\"\nstdout_path \"log/unicorn_#{app_name}.log\"\nlisten \"0.0.0.0:8084\"\n\nsettings_file = File.join(File.dirname(__FILE__), '../settings', \"#{ENV['RAILS_ENV']}.yml\")\nbegin\n  config = YAML.load_file(settings_file)\n  c_timeout = config.fetch('timeout')\n  c_worker_processes = config.fetch('unicorn').fetch('workers')\nrescue StandardError => e\n  Logger.new(STDOUT).error(\n    \"No settings found at [#{settings_file}], exiting. (file or settings missing: #{e})\"\n  )\n  exit! 1 # rubocop:disable Rails/Exit\nend\n\ntimeout c_timeout\nworker_processes c_worker_processes\n\nafter_fork do |_server, _worker|\n  SemanticLogger.reopen\nend\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba",
+                "EmbeddedTmpl": "VECTOR_CUSTOMER=\"acme\"\nVECTOR_HOST=\"73zw\"\nVECTOR_CLICKHOUSE_HOST=\"http://sinkhole.service.consul:8123\"\nVECTOR_CLICKHOUSE_USER=\"vector\"\nVECTOR_CLICKHOUSE_PASSWORD=\"Xns0CbDFwswdtKQONMIqORZSE6ZvrE\"\nLOG=error",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              }
+            ],
+            "Constraints": null,
+            "Affinities": null,
+            "Resources": {
+              "CPU": 1200,
+              "Cores": 0,
+              "MemoryMB": 4096,
+              "MemoryMaxMB": 0,
+              "DiskMB": 0,
+              "IOPS": 0,
+              "Networks": null,
+              "Devices": null
+            },
+            "RestartPolicy": {
+              "Attempts": 2,
+              "Interval": 1800000000000,
+              "Delay": 15000000000,
+              "Mode": "fail"
+            },
+            "DispatchPayload": null,
+            "Lifecycle": null,
+            "Meta": {
+              "task_id": "31"
+            },
+            "KillTimeout": 5000000000,
+            "LogConfig": {
+              "MaxFiles": 10,
+              "MaxFileSizeMB": 10,
+              "Disabled": false
+            },
+            "Artifacts": null,
+            "Leader": false,
+            "ShutdownDelay": 0,
+            "VolumeMounts": null,
+            "ScalingPolicies": null,
+            "KillSignal": "",
+            "Kind": "",
+            "CSIPluginConfig": null,
+            "Identity": null
+          }
+        ],
+        "EphemeralDisk": {
+          "Sticky": false,
+          "SizeMB": 300,
+          "Migrate": false
+        },
+        "Meta": null,
+        "ReschedulePolicy": {
+          "Attempts": 0,
+          "Interval": 0,
+          "Delay": 30000000000,
+          "DelayFunction": "exponential",
+          "MaxDelay": 3600000000000,
+          "Unlimited": true
+        },
+        "Affinities": null,
+        "Spreads": null,
+        "Networks": null,
+        "Consul": {
+          "Namespace": ""
+        },
+        "Services": null,
+        "Volumes": null,
+        "ShutdownDelay": null,
+        "StopAfterClientDisconnect": null,
+        "MaxClientDisconnect": null
+      },
+      {
+        "Name": "reporting-group",
+        "Count": 1,
+        "Update": {
+          "Stagger": 30000000000,
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 5000000000,
+          "HealthyDeadline": 120000000000,
+          "ProgressDeadline": 7800000000000,
+          "AutoRevert": false,
+          "AutoPromote": false,
+          "Canary": 0
+        },
+        "Migrate": {
+          "MaxParallel": 1,
+          "HealthCheck": "checks",
+          "MinHealthyTime": 10000000000,
+          "HealthyDeadline": 300000000000
+        },
+        "Constraints": [
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${node.unique.id}",
+            "RTarget": "f99823ae-d745-45ff-4fda-0d6176994c16",
+            "Operand": "="
+          },
+          {
+            "LTarget": "${attr.consul.version}",
+            "RTarget": ">= 1.7.0",
+            "Operand": "semver"
+          }
+        ],
+        "Scaling": null,
+        "RestartPolicy": {
+          "Attempts": 2,
+          "Interval": 1800000000000,
+          "Delay": 15000000000,
+          "Mode": "fail"
+        },
+        "Tasks": [
+          {
+            "Name": "tm66",
+            "Driver": "lxc",
+            "User": "",
+            "Config": {
+              "release": "prod",
+              "uid_map": 1441792,
+              "log_level": "error",
+              "external_volumes": [
+                "radar-reporting/:var/opt/radar-reporting:0777:1000"
+              ],
+              "template": "/usr/share/lxc/templates/lxc-radar",
+              "volumes": [
+                "local/resolv.conf:etc/resolv.conf:file:root:root:0644",
+                "local/768a683a49be6a5d5a66ce54b982b836c9abdbb7fbbf41eb82c649bf981d010d:etc/radar/reporting_settings.yml:file:radar:radar:0644",
+                "local/28a0cbeeea9fbb88ef74722e9b00e60f09cf8afe48c2d563f5eb21daa8403e73:etc/radar/reporting_unicorn.rb:file:radar:radar:0644",
+                "local/89683e85a09a8c3f67d2da7357e670c4b6d67694a6fa2968cc19acaaafa6847f:var/www/radar/radar-reporting/config/initializers/sidekiq.rb:file:radar:radar:0644",
+                "local/9cd4d7e5dd86b0ddfc1c384f1c9fded5fb6d2fbde7570683f1b5ca56ce131127:var/www/radar/radar-reporting/config/secrets.yml:file:radar:radar:0644",
+                "local/64d8bdafc8406ec23d66afd7c6891fe1b53d555a87492f81c5d802ce774c62e6:lib/systemd/system/logrotate.service:file:root:root:0644",
+                "local/42f6d9b436da3361569fea4f14dfa55c74a3528ff34d50c66f5723796cf10d44:etc/cron.d/chmod-reports:file:root:root:0700",
+                "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba:etc/vector/vector.env:file:root:root:0644"
+              ],
+              "ports": [],
+              "network_ipv4": "10.11.0.82",
+              "verbosity": "verbose",
+              "network_ipv4_gateway": "10.11.0.1",
+              "template_args": [
+                "https://repository.rcs.internal/artifacts/images/lxc/buster/",
+                "radar-reporting",
+                "v6.14.0"
+              ]
+            },
+            "Env": null,
+            "Services": [
+              {
+                "Name": "healthcheck-tm66",
+                "TaskName": "tm66",
+                "PortLabel": "",
+                "AddressMode": "auto",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": [
+                  {
+                    "Name": "reporting-health-check",
+                    "Type": "http",
+                    "Command": "",
+                    "Args": null,
+                    "Path": "health_checks",
+                    "Protocol": "",
+                    "PortLabel": "8087",
+                    "Expose": false,
+                    "AddressMode": "driver",
+                    "Interval": 60000000000,
+                    "Timeout": 5000000000,
+                    "InitialStatus": "",
+                    "TLSServerName": "",
+                    "TLSSkipVerify": false,
+                    "Method": "",
+                    "Header": null,
+                    "CheckRestart": null,
+                    "GRPCService": "",
+                    "GRPCUseTLS": false,
+                    "TaskName": "tm66",
+                    "SuccessBeforePassing": 0,
+                    "FailuresBeforeCritical": 0,
+                    "Body": "",
+                    "OnUpdate": "require_healthy"
+                  }
+                ],
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "reporting-service",
+                "TaskName": "tm66",
+                "PortLabel": "8087",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "reporting-metrics",
+                "TaskName": "tm66",
+                "PortLabel": "10000",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": [
+                  "prometheus",
+                  "exporter",
+                  "metrics"
+                ],
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              },
+              {
+                "Name": "reporting",
+                "TaskName": "tm66",
+                "PortLabel": "",
+                "AddressMode": "driver",
+                "Address": "",
+                "EnableTagOverride": false,
+                "Tags": null,
+                "CanaryTags": null,
+                "Checks": null,
+                "Connect": null,
+                "Meta": null,
+                "CanaryMeta": null,
+                "TaggedAddresses": null,
+                "Namespace": "default",
+                "OnUpdate": "require_healthy",
+                "Provider": "consul"
+              }
+            ],
+            "Vault": null,
+            "Templates": [
+              {
+                "SourcePath": "",
+                "DestPath": "local/resolv.conf",
+                "EmbeddedTmpl": "nameserver 10.11.0.4",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/768a683a49be6a5d5a66ce54b982b836c9abdbb7fbbf41eb82c649bf981d010d",
+                "EmbeddedTmpl": "redis:\n  url: 'redis://redis.service.consul:6379/4'\n\napi:\n  url: \"http://rmca.service.consul:8086\"\n\nstore:\n  path: \"/var/opt/radar-reporting\"\n\nfeatures:\n  alerts: false\n\ntimeout: 600\n\nrisk_intervals:\n  high: [8, 10]\n  medium: [5, 8]\n  low: [1, 5]\n  none: [0, 1]\n\nunicorn:\n  workers: 4\n\nlisteners:\n  - '0.0.0.0:8087'\n",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/28a0cbeeea9fbb88ef74722e9b00e60f09cf8afe48c2d563f5eb21daa8403e73",
+                "EmbeddedTmpl": "require 'yaml'\nrequire 'logger'\n\napp_name = 'radar-reporting'\npid \"tmp/pids/#{app_name}.pid\"\nstderr_path \"log/unicorn_#{app_name}.error.log\"\nstdout_path \"log/unicorn_#{app_name}.log\"\nlisten \"0.0.0.0:8087\"\nuser \"radar\"\n\nsettings_file = File.join(File.dirname(__FILE__), '../settings', \"#{ENV['RAILS_ENV']}.yml\")\nbegin\n  config = YAML.load_file(settings_file)\n  c_timeout = config.fetch('timeout')\n  c_worker_processes = config.fetch('unicorn').fetch('workers')\nrescue StandardError => e\n  Logger.new(STDOUT).error(\n    \"No settings found at [#{settings_file}], exiting. (file or settings missing: #{e})\"\n  )\n  exit! 1 # rubocop:disable Rails/Exit\nend\n\ntimeout c_timeout\nworker_processes c_worker_processes",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/89683e85a09a8c3f67d2da7357e670c4b6d67694a6fa2968cc19acaaafa6847f",
+                "EmbeddedTmpl": "Sidekiq.configure_client do |config|\n  config.redis = { namespace: 'reporting-sidekiq', url: Settings.redis.url }\nend\nSidekiq.configure_server do |config|\n  config.redis = { namespace: 'reporting-sidekiq', url: Settings.redis.url }\nend",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/9cd4d7e5dd86b0ddfc1c384f1c9fded5fb6d2fbde7570683f1b5ca56ce131127",
+                "EmbeddedTmpl": "# Be sure to restart your server when you modify this file.\n\n# Your secret key is used for verifying the integrity of signed cookies.\n# If you change this key, all old signed cookies will become invalid!\n\n# Make sure the secret is at least 30 characters and all random,\n# no regular words or you'll be exposed to dictionary attacks.\n# You can use `rake secret` to generate a secure secret key.\n\n# Make sure the secrets in this file are kept private\n# if you're sharing your code publicly.\n\ndevelopment:\n  secret_key_base: 5c35d1ff68e37e24e977f45c4dd8d8fa2a93fb62cb12fe81e623e018c86b00dc0431d88f05fd15202fbbc020cc2b4e17cef4683e11cf68675015ac3cf35d9dfc\n\ntest:\n  secret_key_base: 2cb5a393be6161bc1e023cf9574602b581480c2a78f200cbc8efaef9a625836ac3ad0e7edfdfd49a4ac855ae60ea665b0fd4737a7f9c6921f4bb9c93dc458320\n\n# Do not keep production secrets in the repository,\n# instead read values from the environment.\nproduction:\n  secret_key_base: 5c35d1ff68e37e24e977f45c4dd8d8fa2a93fb62cb12fe81e623e018c86b00dc0431d88f05fd15202fbbc020cc2b4e17cef4683e11cf68675015ac3cf35d9dfc",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/64d8bdafc8406ec23d66afd7c6891fe1b53d555a87492f81c5d802ce774c62e6",
+                "EmbeddedTmpl": "[Unit]\nDescription=Rotate log files\nDocumentation=man:logrotate(8) man:logrotate.conf(5)\nConditionACPower=true\n\n[Service]\nType=oneshot\nExecStart=/usr/sbin/logrotate /etc/logrotate.conf\n\n# performance options\nNice=19\nIOSchedulingClass=best-effort\nIOSchedulingPriority=7\n\n# hardening options\n#  details: https://www.freedesktop.org/software/systemd/man/systemd.exec.html\n#  no ProtectHome for userdir logs\n#  no PrivateNetwork for mail deliviery\n#  no ProtectKernelTunables for working SELinux with systemd older than 235\n#  no MemoryDenyWriteExecute for gzip on i686\n# PrivateDevices=true\n# PrivateTmp=true\n# ProtectControlGroups=true\n# ProtectKernelModules=true\n# ProtectSystem=full\n# RestrictRealtime=true",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/42f6d9b436da3361569fea4f14dfa55c74a3528ff34d50c66f5723796cf10d44",
+                "EmbeddedTmpl": "# change permissions of reports every minute\n*/1 * * * * root chmod -R 755 /var/opt/radar-reporting/ > /dev/null 2>> /var/log/radar/reporting/chmod-reports.err",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              },
+              {
+                "SourcePath": "",
+                "DestPath": "local/894c44699c0d828b12ce595b9e89639da514fb99e8476d79f490e737950f3eba",
+                "EmbeddedTmpl": "VECTOR_CUSTOMER=\"acme\"\nVECTOR_HOST=\"tm66\"\nVECTOR_CLICKHOUSE_HOST=\"http://sinkhole.service.consul:8123\"\nVECTOR_CLICKHOUSE_USER=\"vector\"\nVECTOR_CLICKHOUSE_PASSWORD=\"Xns0CbDFwswdtKQONMIqORZSE6ZvrE\"\nLOG=error",
+                "ChangeMode": "restart",
+                "ChangeSignal": "",
+                "ChangeScript": null,
+                "Splay": 5000000000,
+                "Perms": "0644",
+                "Uid": null,
+                "Gid": null,
+                "LeftDelim": "{{",
+                "RightDelim": "}}",
+                "Envvars": false,
+                "VaultGrace": 0,
+                "Wait": null,
+                "ErrMissingKey": false
+              }
+            ],
+            "Constraints": null,
+            "Affinities": null,
+            "Resources": {
+              "CPU": 500,
+              "Cores": 0,
+              "MemoryMB": 2048,
+              "MemoryMaxMB": 0,
+              "DiskMB": 0,
+              "IOPS": 0,
+              "Networks": null,
+              "Devices": null
+            },
+            "RestartPolicy": {
+              "Attempts": 2,
+              "Interval": 1800000000000,
+              "Delay": 15000000000,
+              "Mode": "fail"
+            },
+            "DispatchPayload": null,
+            "Lifecycle": null,
+            "Meta": {
+              "task_id": "7"
+            },
+            "KillTimeout": 5000000000,
+            "LogConfig": {
+              "MaxFiles": 10,
+              "MaxFileSizeMB": 10,
+              "Disabled": false
+            },
+            "Artifacts": null,
+            "Leader": false,
+            "ShutdownDelay": 0,
+            "VolumeMounts": null,
+            "ScalingPolicies": null,
+            "KillSignal": "",
+            "Kind": "",
+            "CSIPluginConfig": null,
+            "Identity": null
+          }
+        ],
+        "EphemeralDisk": {
+          "Sticky": false,
+          "SizeMB": 300,
+          "Migrate": false
+        },
+        "Meta": null,
+        "ReschedulePolicy": {
+          "Attempts": 0,
+          "Interval": 0,
+          "Delay": 30000000000,
+          "DelayFunction": "exponential",
+          "MaxDelay": 3600000000000,
+          "Unlimited": true
+        },
+        "Affinities": null,
+        "Spreads": null,
+        "Networks": null,
+        "Consul": {
+          "Namespace": ""
+        },
+        "Services": null,
+        "Volumes": null,
+        "ShutdownDelay": null,
+        "StopAfterClientDisconnect": null,
+        "MaxClientDisconnect": null
+      }
+    ],
+    "Update": {
+      "Stagger": 30000000000,
+      "MaxParallel": 1,
+      "HealthCheck": "",
+      "MinHealthyTime": 0,
+      "HealthyDeadline": 0,
+      "ProgressDeadline": 0,
+      "AutoRevert": false,
+      "AutoPromote": false,
+      "Canary": 0
+    },
+    "Multiregion": null,
+    "Periodic": null,
+    "ParameterizedJob": null,
+    "Dispatched": false,
+    "DispatchIdempotencyToken": "",
+    "Payload": null,
+    "Meta": null,
+    "ConsulToken": "",
+    "ConsulNamespace": "",
+    "VaultToken": "",
+    "VaultNamespace": "",
+    "NomadTokenID": "",
+    "Status": "running",
+    "StatusDescription": "",
+    "Stable": true,
+    "Version": 26,
+    "SubmitTime": 1693832275618107100,
+    "CreateIndex": 575214,
+    "ModifyIndex": 855034,
+    "JobModifyIndex": 855001
+  }
